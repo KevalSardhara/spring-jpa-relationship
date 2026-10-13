@@ -23,4 +23,10 @@ public class Student {
     @ManyToOne(optional = false)
     @JoinColumn(name = "department_id", nullable = false, referencedColumnName = "id")
     private Department department;
+
+    public Department addDepartment(String deptName) {
+        this.department = new Department();
+        this.department.setName(deptName);
+        return department;
+    }
 }

@@ -24,13 +24,13 @@ public class StudentService {
 
     @Transactional
     public Student createStudent(Student student, String deptName) {
-        Department department = new Department();
-        department.setName(deptName);
+//        Department department = new Department();
+//        department.setName(deptName);
 
-        department.getStudents().add(student);
-        student.setDepartment(department);
-
-        departmentRepository.save(department);
+        Department addedDepartment = student.addDepartment(deptName);
+        addedDepartment.getStudents().add(student);
+        student.setDepartment(addedDepartment);
+        departmentRepository.save(addedDepartment);
         return studentRepository.save(student);
     }
 
