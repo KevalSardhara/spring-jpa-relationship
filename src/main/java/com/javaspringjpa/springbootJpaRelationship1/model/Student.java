@@ -9,12 +9,10 @@ import org.springframework.stereotype.Service;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 
 @Entity
 @Table(name = "student_relationship")
 public class Student {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

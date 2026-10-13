@@ -22,18 +22,22 @@ public class StudentService {
         this.departmentRepository = departmentRepository;
     }
 
-//    @Transactional
-//    public Student createStudent(Student student) {
-//        Department department = new Department();
-//        department.setName("DSA");
-//        student.setDepartment(department);
-//        departmentRepository.save(department);
-//        return studentRepository.save(student);
-//    }
+    @Transactional
+    public Student createStudent(Student student, String deptName) {
+        Department department = new Department();
+        department.setName(deptName);
+
+        department.getStudents().add(student);
+        student.setDepartment(department);
+
+        departmentRepository.save(department);
+        return studentRepository.save(student);
+    }
 
     @Transactional
-    public Student createStudent(Student student, Long departmentId) {
+    public Student createStudentWithExistingDepartment(Student student, Long departmentId) {
         Department department = departmentRepository.getDepartmentById(departmentId);
+        department.getStudents().add(student);
         student.setDepartment(department);
         return studentRepository.save(student);
     }

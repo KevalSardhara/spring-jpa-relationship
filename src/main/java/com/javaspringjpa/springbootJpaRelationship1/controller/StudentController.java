@@ -19,8 +19,15 @@ public class StudentController {
 
     @PostMapping("/create")
     public ResponseEntity<Student> createStudent(@RequestBody Student student,
+                                                 @RequestParam String deptName) {
+        Student saveStudent = studentService.createStudent(student, deptName);
+        return ResponseEntity.status(HttpStatus.OK).body(saveStudent);
+    }
+
+    @PostMapping("/create/withDeptId")
+    public ResponseEntity<Student> createStudentWithExistingDepartment(@RequestBody Student student,
                                                  @RequestParam Long departmentId) {
-        Student saveStudent = studentService.createStudent(student, departmentId);
+        Student saveStudent = studentService.createStudentWithExistingDepartment(student, departmentId);
         return ResponseEntity.status(HttpStatus.OK).body(saveStudent);
     }
 
